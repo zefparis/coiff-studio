@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import dayjs from 'dayjs';
 import { appointmentApi, clientApi, serviceApi } from '../lib/resources.js';
 import { formatCurrency, formatDateTime } from '../utils/format.js';
+import CollapsibleSection from '../components/CollapsibleSection.jsx';
 
 const emptyForm = {
   client_id: '',
@@ -108,29 +109,30 @@ const AppointmentsPage = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <header className="flex flex-col gap-2">
         <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Planning</p>
-        <h2 className="text-3xl font-semibold text-slate-900">Rendez-vous</h2>
-        <p className="text-slate-500 max-w-2xl">
-          Organisez votre semaine en un coup d’œil : chaque créneau affiche le client, la prestation et le tarif confirmé.
+        <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900">Rendez-vous</h2>
+        <p className="text-sm sm:text-base text-slate-500">
+          Organisez votre semaine en un coup d'œil : chaque créneau affiche le client, la prestation et le tarif confirmé.
         </p>
       </header>
 
-      <section className="grid xl:grid-cols-[420px_1fr] gap-6">
-        <div className="rounded-3xl bg-white border border-slate-100 p-6 shadow-soft">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Planification</p>
-              <h3 className="text-xl font-semibold text-slate-900">{editingId ? 'Modifier' : 'Programmer'} un rendez-vous</h3>
-            </div>
+      <section className="space-y-6">
+        <CollapsibleSection
+          kicker="Planification"
+          title={editingId ? 'Modifier un rendez-vous' : 'Programmer un rendez-vous'}
+          defaultOpen={true}
+        >
+          <div className="rounded-2xl bg-white border border-slate-100 p-4 sm:p-6 shadow-soft">
             {editingId && (
-              <button type="button" className="text-sm text-slate-500" onClick={handleCancel}>
-                Annuler
-              </button>
+              <div className="mb-4 flex justify-end">
+                <button type="button" className="text-sm text-slate-500 hover:text-slate-900" onClick={handleCancel}>
+                  Annuler
+                </button>
+              </div>
             )}
-          </div>
-          <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="text-sm text-slate-500">Client</label>
               <select
@@ -196,60 +198,61 @@ const AppointmentsPage = () => {
                 rows={3}
               />
             </div>
-            {error && <p className="text-sm text-red-500">{error}</p>}
-            <button
-              type="submit"
-              className="w-full rounded-2xl bg-brand text-white py-3 font-semibold shadow-soft hover:bg-brand-dark"
-              disabled={loading}
-            >
-              {editingId ? 'Mettre à jour' : 'Créer le rendez-vous'}
-            </button>
-          </form>
-        </div>
+              {error && <p className="text-sm text-red-500">{error}</p>}
+              <button
+                type="submit"
+                className="w-full rounded-2xl bg-brand text-white py-3 font-semibold shadow-soft hover:bg-brand-dark"
+                disabled={loading}
+              >
+                {editingId ? 'Mettre à jour' : 'Créer le rendez-vous'}
+              </button>
+            </form>
+          </div>
+        </CollapsibleSection>
 
-        <div className="rounded-3xl bg-slate-50 border border-slate-100 p-4 sm:p-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Calendrier</p>
-              <h3 className="text-xl font-semibold text-slate-900">Cette semaine</h3>
-            </div>
-            <span className="text-sm text-slate-400">
-              {dayjs().startOf('week').add(1, 'day').format('DD MMM')} - {dayjs().endOf('week').format('DD MMM')}
-            </span>
-          </div>
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {weeklyAppointments.map((day) => (
-              <div key={day.label} className="rounded-2xl bg-white p-4 border border-slate-100">
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{day.label}</p>
-                <p className="text-sm text-slate-400">{day.date.format('DD MMM')}</p>
-                <div className="mt-4 space-y-3">
-                  {day.items.length ? (
-                    day.items.map((appt) => (
-                      <div key={appt.id} className="rounded-2xl border border-slate-100 p-3">
-                        <div className="flex justify-between text-sm">
-                          <span className="font-semibold text-slate-900">{appt.clientName}</span>
-                          <span className="text-slate-500">{formatCurrency(appt.price)}</span>
+        <CollapsibleSection
+          kicker="Calendrier"
+          title="Cette semaine"
+          subtitle={`${dayjs().startOf('week').add(1, 'day').format('DD MMM')} - ${dayjs().endOf('week').format('DD MMM')}`}
+          defaultOpen={true}
+        >
+          <div className="rounded-2xl bg-slate-50 border border-slate-100 p-4 sm:p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+              {weeklyAppointments.map((day) => (
+                <div key={day.label} className="rounded-2xl bg-white p-3 sm:p-4 border border-slate-100">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{day.label}</p>
+                    <p className="text-xs text-slate-400">{day.date.format('DD MMM')}</p>
+                  </div>
+                  <div className="space-y-2 sm:space-y-3">
+                    {day.items.length ? (
+                      day.items.map((appt) => (
+                        <div key={appt.id} className="rounded-xl border border-slate-100 p-2 sm:p-3 bg-slate-50">
+                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
+                            <span className="font-semibold text-sm text-slate-900">{appt.clientName}</span>
+                            <span className="text-xs sm:text-sm text-slate-500">{formatCurrency(appt.price)}</span>
+                          </div>
+                          <p className="text-xs text-slate-400 mt-1">{formatDateTime(appt.scheduledAt)}</p>
+                          <p className="text-xs text-slate-500 truncate">{appt.serviceName}</p>
+                          <div className="flex justify-end gap-2 text-xs mt-2">
+                            <button className="text-brand hover:underline" onClick={() => handleEdit(appt)}>
+                              Modifier
+                            </button>
+                            <button className="text-red-500 hover:underline" onClick={() => handleDelete(appt.id)}>
+                              Supprimer
+                            </button>
+                          </div>
                         </div>
-                        <p className="text-xs text-slate-400">{formatDateTime(appt.scheduledAt)}</p>
-                        <p className="text-xs text-slate-500">{appt.serviceName}</p>
-                        <div className="flex justify-end gap-2 text-xs mt-2">
-                          <button className="text-brand" onClick={() => handleEdit(appt)}>
-                            Modifier
-                          </button>
-                          <button className="text-red-500" onClick={() => handleDelete(appt.id)}>
-                            Supprimer
-                          </button>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-xs text-slate-400">Aucune réservation</p>
-                  )}
+                      ))
+                    ) : (
+                      <p className="text-xs text-slate-400 py-4 text-center">Aucune réservation</p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        </CollapsibleSection>
       </section>
     </div>
   );
