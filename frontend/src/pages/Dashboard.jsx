@@ -65,8 +65,8 @@ const DashboardPage = () => {
         />
       </section>
 
-      <section className="space-y-6">
-        <CollapsibleSection kicker="Trésorerie" title="Revenu quotidien" subtitle="30 derniers jours">
+      <section className="space-y-4">
+        <CollapsibleSection kicker="Trésorerie" title="Revenu quotidien" subtitle="30 derniers jours" defaultOpen={false}>
           <div className="space-y-3">
             {dailyRevenue.length ? (
               dailyRevenue.map((item) => (
@@ -89,7 +89,7 @@ const DashboardPage = () => {
           </div>
         </CollapsibleSection>
 
-        <CollapsibleSection kicker="Planning" title="Rendez-vous à venir" subtitle="5 prochains">
+        <CollapsibleSection kicker="Planning" title="Rendez-vous à venir" subtitle="5 prochains" defaultOpen={false}>
           <div className="space-y-3">
             {upcomingAppointments.length ? (
               upcomingAppointments.map((appointment) => (
@@ -118,7 +118,7 @@ const DashboardPage = () => {
           </div>
         </CollapsibleSection>
 
-        <CollapsibleSection kicker="Tendances" title="Revenu mensuel" subtitle="12 derniers mois">
+        <CollapsibleSection kicker="Tendances" title="Revenu mensuel" subtitle="12 derniers mois" defaultOpen={false}>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {monthlyRevenue.length ? (
               monthlyRevenue.map((month) => (

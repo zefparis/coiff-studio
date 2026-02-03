@@ -87,11 +87,11 @@ const ClientsPage = () => {
         </p>
       </header>
 
-      <section className="space-y-6">
+      <section className="space-y-4">
         <CollapsibleSection
           kicker="Formulaire"
           title={editingId ? 'Modifier le client' : 'Ajouter un client'}
-          defaultOpen={true}
+          defaultOpen={false}
         >
           <div className="bg-slate-50 rounded-2xl p-4 sm:p-6 border border-white/60">
             {editingId && (
@@ -160,7 +160,7 @@ const ClientsPage = () => {
         <CollapsibleSection
           kicker="Répertoire"
           title="Liste des clients"
-          defaultOpen={true}
+          defaultOpen={false}
         >
           <div className="bg-white border border-slate-100 rounded-2xl p-4 sm:p-6">
             <div className="mb-4">

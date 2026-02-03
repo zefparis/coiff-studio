@@ -118,11 +118,11 @@ const AppointmentsPage = () => {
         </p>
       </header>
 
-      <section className="space-y-6">
+      <section className="space-y-4">
         <CollapsibleSection
           kicker="Planification"
           title={editingId ? 'Modifier un rendez-vous' : 'Programmer un rendez-vous'}
-          defaultOpen={true}
+          defaultOpen={false}
         >
           <div className="rounded-2xl bg-white border border-slate-100 p-4 sm:p-6 shadow-soft">
             {editingId && (
@@ -214,7 +214,7 @@ const AppointmentsPage = () => {
           kicker="Calendrier"
           title="Cette semaine"
           subtitle={`${dayjs().startOf('week').add(1, 'day').format('DD MMM')} - ${dayjs().endOf('week').format('DD MMM')}`}
-          defaultOpen={true}
+          defaultOpen={false}
         >
           <div className="rounded-2xl bg-slate-50 border border-slate-100 p-4 sm:p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">

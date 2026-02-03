@@ -132,11 +132,11 @@ const InvoicesPage = () => {
         </div>
       </section>
 
-      <section className="space-y-6">
+      <section className="space-y-4">
         <CollapsibleSection
           kicker="Facturation"
           title={editingId ? 'Modifier une facture' : 'Émettre une facture'}
-          defaultOpen={true}
+          defaultOpen={false}
         >
           <div className="rounded-2xl bg-white border border-slate-100 p-4 sm:p-6 shadow-soft">
             {editingId && (
@@ -201,7 +201,7 @@ const InvoicesPage = () => {
         <CollapsibleSection
           kicker="Factures"
           title="Historique de facturation"
-          defaultOpen={true}
+          defaultOpen={false}
         >
           <div className="rounded-2xl bg-white border border-slate-100 p-4 sm:p-6 shadow-soft">
             <div className="flex flex-wrap gap-2 mb-4 justify-center sm:justify-start">
