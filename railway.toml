@@ -1,0 +1,17 @@
+# railway.toml - Root configuration for monorepo deployment
+
+[build]
+# Railway will build from the backend subdirectory
+builder = "NIXPACKS"
+buildCommand = "cd backend && npm install"
+
+[deploy]
+# Start the backend server from the backend subdirectory
+startCommand = "cd backend && npm run start"
+# Ensure Railway detects this as a Node.js app
+watchPatterns = ["backend/**"]
+
+[[volumes]]
+# Persistent storage for SQLite database
+name = "salon-db"
+mountPath = "/data"
