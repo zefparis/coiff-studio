@@ -5,6 +5,8 @@ export const navLinks = [
   { to: '/clients', label: 'Clients' },
   { to: '/appointments', label: 'Rendez-vous' },
   { to: '/invoices', label: 'Factures' },
+  { to: '/products', label: 'Produits' },
+  { to: '/purchases', label: 'Achats' },
 ];
 
 const Sidebar = ({ onNavigate }) => {
