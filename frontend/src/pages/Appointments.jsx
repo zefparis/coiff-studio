@@ -27,10 +27,9 @@ const AppointmentsPage = () => {
     const start = dayjs().startOf('week').add(1, 'day');
     return daysOfWeek.map((day, index) => {
       const dayStart = start.add(index, 'day');
-      const dayEnd = dayStart.endOf('day');
       const items = appointments.filter((appt) => {
         const scheduled = dayjs(appt.scheduledAt);
-        return scheduled.isAfter(dayStart) && scheduled.isBefore(dayEnd);
+        return scheduled.isSame(dayStart, 'day');
       });
       return { label: day, date: dayStart, items };
     });
