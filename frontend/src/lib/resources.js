@@ -26,6 +26,39 @@ export const purchaseApi = {
   getBySupplier: (supplierId) => api.get(`/purchases/supplier/${supplierId}`).then((res) => res.data),
 };
 
+export const accountingApi = {
+  getSummary: (startDate, endDate) => {
+    const params = new URLSearchParams();
+    if (startDate) params.append('startDate', startDate);
+    if (endDate) params.append('endDate', endDate);
+    return api.get(`/accounting/summary?${params}`).then((res) => res.data);
+  },
+  getMonthly: (year) => {
+    const params = year ? `?year=${year}` : '';
+    return api.get(`/accounting/monthly${params}`).then((res) => res.data);
+  },
+  getReport: (startDate, endDate) => {
+    const params = new URLSearchParams();
+    if (startDate) params.append('startDate', startDate);
+    if (endDate) params.append('endDate', endDate);
+    return api.get(`/accounting/report?${params}`).then((res) => res.data);
+  },
+  getTopClients: (limit, startDate, endDate) => {
+    const params = new URLSearchParams();
+    if (limit) params.append('limit', limit);
+    if (startDate) params.append('startDate', startDate);
+    if (endDate) params.append('endDate', endDate);
+    return api.get(`/accounting/top-clients?${params}`).then((res) => res.data);
+  },
+  getTopSuppliers: (limit, startDate, endDate) => {
+    const params = new URLSearchParams();
+    if (limit) params.append('limit', limit);
+    if (startDate) params.append('startDate', startDate);
+    if (endDate) params.append('endDate', endDate);
+    return api.get(`/accounting/top-suppliers?${params}`).then((res) => res.data);
+  },
+};
+
 export const statsApi = {
   get: () => api.get('/stats').then((res) => res.data),
 };

@@ -7,6 +7,7 @@ export const navLinks = [
   { to: '/invoices', label: 'Factures' },
   { to: '/products', label: 'Produits' },
   { to: '/purchases', label: 'Achats' },
+  { to: '/accounting', label: 'Comptabilité' },
 ];
 
 const Sidebar = ({ onNavigate }) => {

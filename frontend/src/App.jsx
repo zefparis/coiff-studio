@@ -6,6 +6,7 @@ import AppointmentsPage from './pages/Appointments.jsx';
 import InvoicesPage from './pages/Invoices.jsx';
 import ProductsPage from './pages/Products.jsx';
 import PurchasesPage from './pages/Purchases.jsx';
+import AccountingPage from './pages/Accounting.jsx';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/invoices" element={<InvoicesPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/purchases" element={<PurchasesPage />} />
+        <Route path="/accounting" element={<AccountingPage />} />
       </Route>
     </Routes>
   );

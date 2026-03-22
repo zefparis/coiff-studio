@@ -7,6 +7,7 @@ import invoicesRouter from './invoices.js';
 import statsRouter from './stats.js';
 import productsRouter from './products.js';
 import purchasesRouter from './purchases.js';
+import accountingRouter from './accounting.js';
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use('/invoices', invoicesRouter);
 router.use('/stats', statsRouter);
 router.use('/products', productsRouter);
 router.use('/purchases', purchasesRouter);
+router.use('/accounting', accountingRouter);
 
 export default router;
