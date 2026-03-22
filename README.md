@@ -1,4 +1,4 @@
-# Aura Studio - Salon Management System
+# M.Y COIFFURE - Salon Management System
 
 Application complète de gestion de salon de coiffure avec backend Node.js/Express et frontend React/Vite. Interface entièrement en français avec design responsive moderne.
 
@@ -232,4 +232,4 @@ ISC
 
 ## 👥 Auteur
 
-Développé pour Aura Studio - Salon de coiffure
+Développé pour M.Y COIFFURE - Salon de coiffure
